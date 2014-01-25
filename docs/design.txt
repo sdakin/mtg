@@ -1,0 +1,31 @@
+Opponent
+	Life: ##
+	Hand (#)
+	Library (#)
+	Graveyard (#)
+	Exiled (#)
+
+Turn phases
+	Beginning: untap, upkeep, draw
+	First Main
+	Combat: begin combat, declare attackers, declare blockers, combat damage, end combat
+	Second Main
+	Ending: end, clean up
+
+Me
+	Life: ##
+	Mana pool: ...
+	Hand (#)
+	Library (#)
+	Graveyard (#)
+	Exiled (#)
+
+
+Card actions
+	Tap (lands add mana to mana pool)
+	Attack (tap)
+	Attack (no tap)
+	Send to: graveyard, hand, library, exile
+	Set controller: opponent, me
+	Add counter
+	*click on lower right area to adjust Power/Toughness

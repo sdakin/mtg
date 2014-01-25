@@ -1,0 +1,80 @@
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/xlib/jqRotate.min.js"></script>
+<style>
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.board {
+	height: 100%;
+	width: 100%;
+}
+
+.sidebar {
+	width: 150px;
+}
+
+.battlefield {
+	position: absolute;
+	top: 0;
+	left: 150;
+}
+
+.cardarea {
+	position: relative;
+}
+
+.card {
+	position: absolute;
+}
+</style>
+</head>
+<body>
+<div class="board">
+	<div class="sidebar">
+		<div>Life:</div>
+		<div>Mana Pool:</div>
+		<div>Hand</div>
+		<div>Library</div>
+		<div>Graveyard</div>
+		<div>Exiled</div>
+	</div>
+	<div class="battlefield">
+		<div class="cardarea">
+			<img class="card" src="cards/Theros/Purphoros, God of the Forge.full.jpg" style="top:50;left:50"/>
+			<img class="card" src="cards/Theros/Two-Headed Cerberus.full.jpg" style="top:50;left:300"/>
+		</div>
+	</div>
+</div>
+<script>
+$(function() {
+	console.log("doc ready");
+	var $cards = $(".card");
+	$cards.draggable({
+	    stop: function(event, ui) {
+	        // event.toElement is the element that was responsible for
+	        // triggering this event. The handle, in case of a draggable.
+	        $( event.toElement ).one('click', function(e){ e.stopImmediatePropagation(); } );
+	    }
+	});
+	$cards.click(onCardClick);
+});
+
+function onCardClick(e) {
+	var $card = $(e.target);
+	var tapped = $card.attr("data-tapped") == "true";
+	if (tapped) {
+		$card.rotate({angle:90, animateTo:0, duration:1000});
+	} else {
+		$card.rotate({angle:0, animateTo:90, duration:1000});
+	}
+	$card.attr("data-tapped", !tapped);
+}
+</script>
+</body>
+</html>
