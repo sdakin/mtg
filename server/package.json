@@ -1,0 +1,10 @@
+{
+  "name": "mtg",
+  "description": "Magic the Gathering Game Server",
+  "version": "0.1.0",
+  "dependencies": {
+    "express": "~3",
+    "mongodb": "~1",
+    "q": "~0.9"
+  }
+}

@@ -1,8 +1,14 @@
 {
 	"folders":
 	[
-		{
-			"path": "/Users/sdakin/dev/projects/Web/mtg"
-		}
+        {
+            "path": "app"
+        },
+        {
+            "path": "docs"
+        },
+        {
+            "path": "server"
+        }
 	]
 }
