@@ -27,7 +27,6 @@ define(
     MtGApp.prototype.init = function() {
         var self = this;
 
-		$(".handview").width($(".board").width() - parseInt($(".handview").css("left")) - 2);
 		var $cards = $(".card");
 		$cards.draggable({
 		    stop: function(event, ui) {
@@ -37,6 +36,25 @@ define(
 		    }
 		});
 		$cards.click(onCardClick);
+
+		$("#my-hand-nav").click(function(e) {
+			$(e.currentTarget).addClass("active");
+			self.showHand();
+		});
+
+		$(".handview .closebox").click(function() { self.hideHand(); });
+    };
+
+    MtGApp.prototype.hideHand = function() {
+    	var $handView = $(".handview");
+    	$handView.hide();
+    	$("#my-hand-nav").removeClass("active");
+    };
+
+    MtGApp.prototype.showHand = function() {
+    	var $handView = $(".handview");
+		$handView.width($(".board").width() - parseInt($(".handview").css("left")) - 2);
+		$handView.show();
     };
 
     return MtGApp;

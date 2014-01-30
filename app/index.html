@@ -14,9 +14,17 @@ body {
 }
 
 .sidebar {
+	position: relative;
 	width: 150px;
 	height: 100%;
 	border-right: solid 1px;
+}
+
+.my-stats {
+	position: absolute;
+	bottom: 0;
+	width: 149;
+	border-top: 1px solid;
 }
 
 .battlefield {
@@ -34,6 +42,7 @@ body {
 }
 
 .handview {
+	display: none;
 	position: absolute;
 	bottom: 0;
 	left: 150;
@@ -68,16 +77,18 @@ body {
 <body>
 <div class="board">
 	<div class="sidebar">
-		<div style="padding: 7px;border-bottom: solid 1px">
-			<div>Life:</div>
-			<div>Mana Pool:</div>
+		<div class="my-stats">
+			<div style="padding: 7px;border-bottom: solid 1px">
+				<div>Life:</div>
+				<div>Mana Pool:</div>
+			</div>
+			<ul class="nav nav-pills nav-stacked">
+				<li id="my-hand-nav"><a href="#">Hand<span class="badge pull-right">7</span></a></li>
+				<li><a href="#">Library<span class="badge pull-right">60</span></a></li>
+				<li><a href="#">Graveyard<span class="badge pull-right">0</span></a></li>
+				<li><a href="#">Exiled<span class="badge pull-right">0</span></a></li>
+			</ul>
 		</div>
-		<ul class="nav nav-pills nav-stacked">
-			<li class="active"><a href="#">Hand<span class="badge pull-right">7</span></a></li>
-			<li><a href="#">Library<span class="badge pull-right">60</span></a></li>
-			<li><a href="#">Graveyard<span class="badge pull-right">0</span></a></li>
-			<li><a href="#">Exiled<span class="badge pull-right">0</span></a></li>
-		</ul>
 	</div>
 	<div class="battlefield">
 		<div class="cardarea">
