@@ -1,8 +1,5 @@
 <html>
 <head>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="js/xlib/jqRotate.min.js"></script>
 <link rel="stylesheet" type="text/css" href="xlib/tbs/css/bootstrap.min.css">
 <style>
 body {
@@ -53,6 +50,19 @@ body {
 .handcards ul li {display: inline-block; padding: 0; margin: 0;}
 .handcards ul li img {height: 310px;}
 
+.handcards .closebox {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 2;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+}
+
+.handcards .closebox:hover {
+	background-color: crimson;
+}
+
 </style>
 </head>
 <body>
@@ -63,7 +73,7 @@ body {
 			<div>Mana Pool:</div>
 		</div>
 		<ul class="nav nav-pills nav-stacked">
-			<li><a href="#">Hand<span class="badge pull-right">7</span></a></li>
+			<li class="active"><a href="#">Hand<span class="badge pull-right">7</span></a></li>
 			<li><a href="#">Library<span class="badge pull-right">60</span></a></li>
 			<li><a href="#">Graveyard<span class="badge pull-right">0</span></a></li>
 			<li><a href="#">Exiled<span class="badge pull-right">0</span></a></li>
@@ -78,6 +88,7 @@ body {
 	</div>
 	<div class="handview">
 		<div class="handcards">
+			<div class="closebox"><img src="img/cross.png"/></div>
 			<ul>
 				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
 				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
@@ -88,30 +99,6 @@ body {
 		</div>
 	</div>
 </div>
-<script>
-$(function() {
-	$(".handview").width($(".board").width() - parseInt($(".handview").css("left")) - 2);
-	var $cards = $(".card");
-	$cards.draggable({
-	    stop: function(event, ui) {
-	        // event.toElement is the element that was responsible for
-	        // triggering this event. The handle, in case of a draggable.
-	        $( event.toElement ).one('click', function(e){ e.stopImmediatePropagation(); } );
-	    }
-	});
-	$cards.click(onCardClick);
-});
-
-function onCardClick(e) {
-	var $card = $(e.target);
-	var tapped = $card.attr("data-tapped") == "true";
-	if (tapped) {
-		$card.rotate({angle:90, animateTo:0, duration:1000});
-	} else {
-		$card.rotate({angle:0, animateTo:90, duration:1000});
-	}
-	$card.attr("data-tapped", !tapped);
-}
-</script>
+<script data-main="js/app/appMain" src="js/xlib/require.js"></script>
 </body>
 </html>
