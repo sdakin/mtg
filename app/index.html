@@ -40,26 +40,17 @@ body {
 	position: absolute;
 	bottom: 0;
 	left: 150;
-	height: 310;
-	display: table;
-	width: 832;
+	height: 327;
 	overflow-x: scroll;
+	overflow-y: hidden;
+	border: 1px solid;
 }
 
 .handview img {
 	display: inline-block;
 }
-
-.handview {
-	position: absolute;
-	left: 150;
-	bottom: 0;
-	height: 330px;
-	overflow: auto;
-	border: 1px solid;
-}
 .handcards ul {height: 310px; list-style-type: none; white-space: nowrap; padding: 0; margin: 0;}
-.handcards ul li {display: inline; padding: 0; margin: 0;}
+.handcards ul li {display: inline-block; padding: 0; margin: 0;}
 .handcards ul li img {height: 310px;}
 
 </style>
@@ -99,8 +90,7 @@ body {
 </div>
 <script>
 $(function() {
-	console.log("doc ready");
-	$(".handview").width($(".board").width() - parseInt($(".handview").css("left")));
+	$(".handview").width($(".board").width() - parseInt($(".handview").css("left")) - 2);
 	var $cards = $(".card");
 	$cards.draggable({
 	    stop: function(event, ui) {
