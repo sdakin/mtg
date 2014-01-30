@@ -3,6 +3,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="js/xlib/jqRotate.min.js"></script>
+<link rel="stylesheet" type="text/css" href="xlib/tbs/css/bootstrap.min.css">
 <style>
 body {
 	height: 100%;
@@ -17,6 +18,8 @@ body {
 
 .sidebar {
 	width: 150px;
+	height: 100%;
+	border-right: solid 1px;
 }
 
 .battlefield {
@@ -32,28 +35,72 @@ body {
 .card {
 	position: absolute;
 }
+
+.handview {
+	position: absolute;
+	bottom: 0;
+	left: 150;
+	height: 310;
+	display: table;
+	width: 832;
+	overflow-x: scroll;
+}
+
+.handview img {
+	display: inline-block;
+}
+
+.handview {
+	position: absolute;
+	left: 150;
+	bottom: 0;
+	height: 330px;
+	overflow: auto;
+	border: 1px solid;
+}
+.handcards ul {height: 310px; list-style-type: none; white-space: nowrap; padding: 0; margin: 0;}
+.handcards ul li {display: inline; padding: 0; margin: 0;}
+.handcards ul li img {height: 310px;}
+
 </style>
 </head>
 <body>
 <div class="board">
 	<div class="sidebar">
-		<div>Life:</div>
-		<div>Mana Pool:</div>
-		<div>Hand</div>
-		<div>Library</div>
-		<div>Graveyard</div>
-		<div>Exiled</div>
+		<div style="padding: 7px;border-bottom: solid 1px">
+			<div>Life:</div>
+			<div>Mana Pool:</div>
+		</div>
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="#">Hand<span class="badge pull-right">7</span></a></li>
+			<li><a href="#">Library<span class="badge pull-right">60</span></a></li>
+			<li><a href="#">Graveyard<span class="badge pull-right">0</span></a></li>
+			<li><a href="#">Exiled<span class="badge pull-right">0</span></a></li>
+		</ul>
 	</div>
 	<div class="battlefield">
 		<div class="cardarea">
 			<img class="card" src="cards/Theros/Purphoros, God of the Forge.full.jpg" style="top:50;left:50"/>
 			<img class="card" src="cards/Theros/Two-Headed Cerberus.full.jpg" style="top:50;left:300"/>
+			<img class="card" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card" style="top:50;left:550"/>
+		</div>
+	</div>
+	<div class="handview">
+		<div class="handcards">
+			<ul>
+				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
+				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
+				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
+				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
+				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
+			</ul>
 		</div>
 	</div>
 </div>
 <script>
 $(function() {
 	console.log("doc ready");
+	$(".handview").width($(".board").width() - parseInt($(".handview").css("left")));
 	var $cards = $(".card");
 	$cards.draggable({
 	    stop: function(event, ui) {
