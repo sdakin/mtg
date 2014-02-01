@@ -55,21 +55,33 @@ body {
 .handview img {
 	display: inline-block;
 }
+
+.handcards {
+	position: relative;
+	display: inline-block;
+}
+
 .handcards ul {height: 310px; list-style-type: none; white-space: nowrap; padding: 0; margin: 0;}
 .handcards ul li {display: inline-block; padding: 0; margin: 0;}
 .handcards ul li img {height: 310px;}
 
-.handcards .closebox {
+.hand-closebox {
+	display: none;
 	position: absolute;
-	top: 0;
-	right: 0;
+	bottom: 326;
+	left: 149;
+	border: 1px solid;
 	padding: 2;
-	border-bottom: 1px solid;
-	border-left: 1px solid;
 }
 
-.handcards .closebox:hover {
+.hand-closebox:hover {
 	background-color: crimson;
+}
+
+.halfsize {
+	transform: scale(0.5, 0.5);
+	-ms-transform: scale(0.5, 0.5);
+	-webkit-transform: scale(0.5, 0.5);
 }
 
 </style>
@@ -97,9 +109,9 @@ body {
 			<img class="card" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card" style="top:50;left:550"/>
 		</div>
 	</div>
+	<div class="hand-closebox"><img src="img/cross.png"/></div>
 	<div class="handview">
 		<div class="handcards">
-			<div class="closebox"><img src="img/cross.png"/></div>
 			<ul>
 				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
 				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
