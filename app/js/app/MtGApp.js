@@ -62,7 +62,7 @@ define(
     return MtGApp;
 });
 
-function onCardClick(e) {
+function onCardClickOld(e) {
 	var $card = $(e.target);
     var posOffset = ($card.height() - $card.width()) / 2;
 	var tapped = $card.attr("data-tapped") == "true";
@@ -89,4 +89,15 @@ function onCardClick(e) {
         $card.css("left", left);
         $card.attr("data-tapped", !tapped);
     }
+}
+
+function onCardClick(e) {
+    var $card = $(e.target);
+    var tapped = $card.attr("data-tapped") == "true";
+    if (tapped) {
+        $card.rotate({angle:90, animateTo:0, duration:750});
+    } else {
+        $card.rotate({angle:0, animateTo:90, duration:750});
+    }
+    $card.attr("data-tapped", !tapped);
 }
