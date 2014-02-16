@@ -6,6 +6,7 @@ body {
 	height: 100%;
 	width: 100%;
 	margin: 0;
+	overflow-x: hidden;
 }
 
 .board {
@@ -75,7 +76,7 @@ body {
 }
 
 .handcards ul {height: 310px; list-style-type: none; white-space: nowrap; padding: 0; margin: 0;}
-.handcards ul li {display: inline-block; padding: 0; margin: 0;}
+.handcards ul li {display: inline-block; padding: 0 5 0 0; margin: 0;}
 .handcards ul li img {height: 310px;}
 
 .hand-closebox {
@@ -119,31 +120,29 @@ body {
 				<div>Mana Pool:</div>
 			</div>
 			<ul class="nav nav-pills nav-stacked">
-				<li id="my-hand-nav"><a href="#">Hand<span class="badge pull-right">7</span></a></li>
+				<li id="my-hand-nav"><a href="#">Hand<span class="badge pull-right"></span></a></li>
 				<li><a href="#">Library<span class="badge pull-right">60</span></a></li>
-				<li><a href="#">Graveyard<span class="badge pull-right">0</span></a></li>
-				<li><a href="#">Exiled<span class="badge pull-right">0</span></a></li>
+				<li id="my-graveyard-nav">
+					<a href="#">Graveyard<span class="badge pull-right"></span></a>
+				</li>
+				<li id="my-exiled-nav">
+					<a href="#">Exiled<span class="badge pull-right"></span></a>
+				</li>
 			</ul>
 		</div>
 	</div>
 	<div class="battlefield">
 		<div class="cardarea">
-			<div class="card" style="top:50;left:50;background-image:url('cards/Theros/Purphoros, God of the Forge.full.jpg')"></div>
-			<div class="card" style="top:50;left:300;background-image:url('cards/Theros/Two-Headed Cerberus.full.jpg')"></div>
-			<div class="card" style="top:50;left:550;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
-			<div class="card" style="top:375;left:50;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
+			<div class="card" style="top:10;left:10;background-image:url('cards/Theros/Purphoros, God of the Forge.full.jpg')"></div>
+			<div class="card" style="top:10;left:260;background-image:url('cards/Theros/Two-Headed Cerberus.full.jpg')"></div>
+			<div class="card" style="top:10;left:510;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
+			<div class="card" style="top:335;left:10;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
 		</div>
 	</div>
 	<div class="hand-closebox"><img src="img/cross.png"/></div>
 	<div class="handview">
 		<div class="handcards">
-			<ul>
-				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
-				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
-				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
-				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
-				<li><img src="cards/Theros/Arena Athlete.full.jpg"/></li>
-			</ul>
+			<ul></ul>
 		</div>
 	</div>
 </div>
