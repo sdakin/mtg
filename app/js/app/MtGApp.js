@@ -37,6 +37,8 @@ define(
 		});
 		$cards.click(onCardClick);
 
+        $(".turn-phases button").click(onTurnPhaseClick);
+
 		$("#my-hand-nav").click(function(e) {
 			$(e.currentTarget).addClass("active");
 			self.showHand();
@@ -62,37 +64,19 @@ define(
     return MtGApp;
 });
 
-function onCardClickOld(e) {
-	var $card = $(e.target);
-    var posOffset = ($card.height() - $card.width()) / 2;
-	var tapped = $card.attr("data-tapped") == "true";
-	if (tapped) {
-        var top = String(parseInt($card.css("top")) - posOffset) + "px";
-        var left = String(parseInt($card.css("left")) + posOffset) + "px";
-        $card.css("top", top);
-        $card.css("left", left);
-		$card.rotate({angle:90, animateTo:0, duration:750, callback:onCardUntapped});
-	} else {
-		$card.rotate({angle:0, animateTo:90, duration:750, callback:onCardTapped});
-	}
-
-    function onCardUntapped() {
-	    $card.attr("data-tapped", !tapped);
-    }
-
-    function onCardTapped() {
-        var originOffset = String($card.height() / 2) + "px";
-        $card.css("-webkit-transform-origin", originOffset + " " + originOffset);
-        var top = String(parseInt($card.css("top")) + posOffset) + "px";
-        var left = String(parseInt($card.css("left")) - posOffset) + "px";
-        $card.css("top", top);
-        $card.css("left", left);
-        $card.attr("data-tapped", !tapped);
-    }
-}
-
 function onCardClick(e) {
     var $card = $(e.target);
+
+    // find the highest zIndex of all the cards, not including the one that was clicked on,
+    // and set the clicked on card's zIndex to 1 more than that to make sure it shows up
+    // on top of all of the other cards
+    var maxZIndex = 0;
+    $(".card").each(function(index, card) {
+        if (card != e.target)
+            maxZIndex = Math.max($(card).zIndex(), maxZIndex);
+    });
+    $card.zIndex(maxZIndex + 1);
+
     var tapped = $card.attr("data-tapped") == "true";
     if (tapped) {
         $card.rotate({angle:90, animateTo:0, duration:750});
@@ -100,4 +84,18 @@ function onCardClick(e) {
         $card.rotate({angle:0, animateTo:90, duration:750});
     }
     $card.attr("data-tapped", !tapped);
+}
+
+function onTurnPhaseClick(e) {
+    console.log($(e.target).text());
+    switch ($(e.target).text()) {
+        case "Untap":
+            $(".card").each(function(index, card) {  
+                var $card = $(card);
+                if ($card.attr("data-tapped") == "true") {
+                    $card.rotate({angle:90, animateTo:0, duration:750});
+                    $card.attr("data-tapped", false);
+                }
+            });
+    }
 }

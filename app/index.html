@@ -20,6 +20,15 @@ body {
 	border-right: solid 1px;
 }
 
+.turn-phases {
+	text-align: center;
+}
+
+.turn-phases button {
+	width: 120px;
+	margin-bottom: 5px;
+}
+
 .my-stats {
 	position: absolute;
 	bottom: 0;
@@ -93,6 +102,17 @@ body {
 <body>
 <div class="board">
 	<div class="sidebar">
+		<div style="border-top: solid 1px;font-weight: bold;padding: 5px">Turn Phases</div>
+		<div class="turn-phases" style="border-bottom: solid 1px;">
+			<button type="button" class="btn btn-default btn-xs">Untap</button>
+			<button type="button" class="btn btn-default btn-xs">Upkeep</button>
+			<button type="button" class="btn btn-default btn-xs">Draw</button>
+			<button type="button" class="btn btn-default btn-xs">Main 1</button>
+			<button type="button" class="btn btn-default btn-xs">Combat</button>
+			<button type="button" class="btn btn-default btn-xs">Main 2</button>
+			<button type="button" class="btn btn-default btn-xs">Clean Up</button>
+			<button type="button" class="btn btn-default btn-xs">Done</button>
+		</div>
 		<div class="my-stats">
 			<div style="padding: 7px;border-bottom: solid 1px">
 				<div>Life:</div>
