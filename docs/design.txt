@@ -22,7 +22,7 @@ Me
 
 
 Card actions
-	Tap (lands add mana to mana pool)
+	Tap/Untap (lands add mana to mana pool)
 	Attack (tap)
 	Attack (no tap)
 	Send to: graveyard, hand, library, exile

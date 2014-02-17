@@ -19,7 +19,7 @@ define(
         EventTarget.call(this);
 
         this.hand = [new Card(378521), new Card(378516), new Card(378517)];
-        this.library = [];
+        this.library = [378379, 378403, 378398];
         this.graveyard = [];
         this.exiled = [];
     }
@@ -76,6 +76,7 @@ define(
 
     MtGApp.prototype.updateMyStatsUI = function() {
         $("#my-hand-nav .badge").text(this.hand.length);
+        $("#my-library-nav .badge").text(this.library.length);
         $("#my-graveyard-nav .badge").text(this.graveyard.length);
         $("#my-exiled-nav .badge").text(this.exiled.length);
     }
@@ -105,7 +106,6 @@ define(
     MtGApp.prototype.onTurnPhaseClick = function(e) {
         var self = this;
 
-        console.log($(e.target).text());
         switch ($(e.target).text()) {
             case "Untap":
                 $(".card").each(function(index, card) {  
@@ -125,7 +125,15 @@ define(
     MtGApp.prototype.drawCard = function() {
         var self = this;
 
-        self.showHand();
+        if (self.library.length == 0) {
+            alert("no cards left");
+        } else {
+            var newCardID = self.library[0];
+            self.library = self.library.slice(1);
+            self.hand.unshift(new Card(newCardID));
+            self.showHand();
+            self.updateMyStatsUI();
+        }
     }
 
     return MtGApp;
