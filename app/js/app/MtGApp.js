@@ -8,8 +8,8 @@ The main application module for the Magic the Gathering app.
 @extends EventTarget
 **/
 define(
-    ["xlib/EventTarget", "jqueryUI", "jqueryRotate", "data/card"],
-    function(EventTarget, jqu, jqr, Card)
+    ["xlib/EventTarget", "jqueryUI", "jqueryRotate", "data/card", "ui/CardView"],
+    function(EventTarget, jqu, jqr, Card, CardView)
 {
     /**
         The MtGApp object.
@@ -41,7 +41,7 @@ define(
             }
         });
         $cards.click(function(e) { self.onCardClick(e); });
-
+        $("#card-menu>li>a").click(function(e) { self.onCardMenuClick(e); });
         $(".turn-phases button").click(function(e) { self.onTurnPhaseClick(e); });
 
         $("#my-hand-nav").click(function(e) {
@@ -79,34 +79,31 @@ define(
         $("#my-library-nav .badge").text(this.library.length);
         $("#my-graveyard-nav .badge").text(this.graveyard.length);
         $("#my-exiled-nav .badge").text(this.exiled.length);
-    }
+    };
 
     MtGApp.prototype.onCardClick = function(e) {
-        var $card = $(e.target);
-
-        // find the highest zIndex of all the cards, not including the one that was clicked on,
-        // and set the clicked on card's zIndex to 1 more than that to make sure it shows up
-        // on top of all of the other cards
-        var maxZIndex = 0;
-        $(".card").each(function(index, card) {
-            if (card != e.target)
-                maxZIndex = Math.max($(card).zIndex(), maxZIndex);
-        });
-        $card.zIndex(maxZIndex + 1);
-
+        var self = this;
+        self.$activeCard = new CardView($(e.target));
+        self.$activeCard.setActive();
         var $cardMenu = $("#card-menu");
-        var offset = $card.offset();
-        $cardMenu.offset({ top: offset.top + 3, left: offset.left + 23 });
+        var offset = self.$activeCard.$card.offset();
+        $("#card-menu>li>a").first().text(self.$activeCard.isTapped() ? "Untap" : "Tap");
         $cardMenu.show();
+        $cardMenu.offset({ top: offset.top + 3, left: offset.left + 23 });
+    };
 
-        // var tapped = $card.attr("data-tapped") == "true";
-        // if (tapped) {
-        //     $card.rotate({angle:90, animateTo:0, duration:750});
-        // } else {
-        //     $card.rotate({angle:0, animateTo:90, duration:750});
-        // }
-        // $card.attr("data-tapped", !tapped);
-    }
+    MtGApp.prototype.onCardMenuClick = function(e) {
+        var self = this;
+        var $cardMenu = $("#card-menu");
+
+        switch ($(e.target).text()) {
+            case "Tap":
+            case "Untap":
+                self.$activeCard.toggleTappedState();
+                $cardMenu.hide();
+                break;
+        }
+    };
 
     MtGApp.prototype.onTurnPhaseClick = function(e) {
         var self = this;
@@ -125,7 +122,7 @@ define(
                 self.drawCard();
                 break;
         }
-    }
+    };
 
     MtGApp.prototype.drawCard = function() {
         var self = this;
@@ -139,7 +136,7 @@ define(
             self.showHand();
             self.updateMyStatsUI();
         }
-    }
+    };
 
     return MtGApp;
 });

@@ -111,8 +111,6 @@ body {
 	display: none;
 	font-size: 12px;
 	min-width: 109px;
-	left: 33;
-	top: 10;
 }
 
 #card-menu>li>a {
@@ -194,25 +192,24 @@ body {
 			<div class="card" style="top:10;left:290;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
 			<div class="card" style="top:200;left:10;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
 		</div>
-
-		<!-- testing card dropdown menu -->
-		<div>
-			<ul id="card-menu" class="dropdown-menu" role="menu">
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tap</a></li>
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Attack</a></li>
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Send to...<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Set Controller...<span class="glyphicon glyphicon-chevron-right pull-right"></a></li>
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Add Counter...</a></li>
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Set P/T...</a></li>
-			</ul>
-		</div>
-
 	</div>
 	<div class="hand-closebox"><img src="img/cross.png"/></div>
 	<div class="handview">
 		<div class="handcards">
 			<ul></ul>
 		</div>
+	</div>
+
+	<div>
+		<!-- card dropdown menu -->
+		<ul id="card-menu" class="dropdown-menu" role="menu">
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tap</a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Attack</a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Send to...<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Set Controller...<span class="glyphicon glyphicon-chevron-right pull-right"></a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Add Counter...</a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Set P/T...</a></li>
+		</ul>
 	</div>
 </div>
 <script data-main="js/app/appMain" src="js/xlib/require.js"></script>

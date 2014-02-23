@@ -1,12 +1,12 @@
-"use strict";
-
 /**
 The Card data class.
 
 @module data
 @class Card
 **/
-define(function(EventTarget) {
+define(function() {
+    "use strict";
+
     /**
         The Card object.
         @constructor
