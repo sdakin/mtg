@@ -57,8 +57,9 @@ body {
 
 .card {
 	position: absolute;
-	width: 310;
-	height: 310;
+	width: 155;
+	height: 155;
+	background-size: 72%;
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -104,6 +105,18 @@ body {
 	transform: scale(0.5, 0.5);
 	-ms-transform: scale(0.5, 0.5);
 	-webkit-transform: scale(0.5, 0.5);
+}
+
+#card-menu {
+	display: none;
+	font-size: 12px;
+	min-width: 109px;
+	left: 33;
+	top: 10;
+}
+
+#card-menu>li>a {
+	padding: 3px 5px;
 }
 
 </style>
@@ -177,10 +190,23 @@ body {
 	<div class="battlefield">
 		<div class="cardarea">
 			<div class="card" style="top:10;left:10;background-image:url('cards/Theros/Purphoros, God of the Forge.full.jpg')"></div>
-			<div class="card" style="top:10;left:260;background-image:url('cards/Theros/Two-Headed Cerberus.full.jpg')"></div>
-			<div class="card" style="top:10;left:510;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
-			<div class="card" style="top:335;left:10;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
+			<div class="card" style="top:10;left:150;background-image:url('cards/Theros/Two-Headed Cerberus.full.jpg')"></div>
+			<div class="card" style="top:10;left:290;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
+			<div class="card" style="top:200;left:10;background-image:url('http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=373597&amp;type=card')"></div>
 		</div>
+
+		<!-- testing card dropdown menu -->
+		<div>
+			<ul id="card-menu" class="dropdown-menu" role="menu">
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tap</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Attack</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Send to...<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Set Controller...<span class="glyphicon glyphicon-chevron-right pull-right"></a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Add Counter...</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Set P/T...</a></li>
+			</ul>
+		</div>
+
 	</div>
 	<div class="hand-closebox"><img src="img/cross.png"/></div>
 	<div class="handview">

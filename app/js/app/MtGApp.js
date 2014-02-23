@@ -94,13 +94,18 @@ define(
         });
         $card.zIndex(maxZIndex + 1);
 
-        var tapped = $card.attr("data-tapped") == "true";
-        if (tapped) {
-            $card.rotate({angle:90, animateTo:0, duration:750});
-        } else {
-            $card.rotate({angle:0, animateTo:90, duration:750});
-        }
-        $card.attr("data-tapped", !tapped);
+        var $cardMenu = $("#card-menu");
+        var offset = $card.offset();
+        $cardMenu.offset({ top: offset.top + 3, left: offset.left + 23 });
+        $cardMenu.show();
+
+        // var tapped = $card.attr("data-tapped") == "true";
+        // if (tapped) {
+        //     $card.rotate({angle:90, animateTo:0, duration:750});
+        // } else {
+        //     $card.rotate({angle:0, animateTo:90, duration:750});
+        // }
+        // $card.attr("data-tapped", !tapped);
     }
 
     MtGApp.prototype.onTurnPhaseClick = function(e) {
