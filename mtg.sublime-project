@@ -9,6 +9,9 @@
         },
         {
             "path": "server"
+        },
+        {
+            "path": "tools"
         }
 	]
 }

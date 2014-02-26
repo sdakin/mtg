@@ -1,5 +1,3 @@
-"use strict";
-
 /**
 The main application module for the Magic the Gathering app.
 
@@ -8,9 +6,11 @@ The main application module for the Magic the Gathering app.
 @extends EventTarget
 **/
 define(
-    ["xlib/EventTarget", "jqueryUI", "jqueryRotate", "data/card", "ui/CardView"],
-    function(EventTarget, jqu, jqr, Card, CardView)
+    ["xlib/EventTarget", "jqueryUI", "jqueryRotate", "data/card", "ui/CardView", "app/Battlefield"],
+    function(EventTarget, jqu, jqr, Card, CardView, Battlefield)
 {
+    "use strict";
+
     /**
         The MtGApp object.
         @constructor
@@ -18,8 +18,8 @@ define(
     function MtGApp() {
         EventTarget.call(this);
 
-        this.hand = [new Card(378521), new Card(378516), new Card(378517)];
-        this.library = [378379, 378403, 378398];
+        this.hand = [];
+        this.library = [];
         this.graveyard = [];
         this.exiled = [];
     }
@@ -32,23 +32,27 @@ define(
     MtGApp.prototype.init = function() {
         var self = this;
 
-        var $cards = $(".card");
-        $cards.draggable({
-            stop: function(event, ui) {
-                // event.toElement is the element that was responsible for
-                // triggering this event. The handle, in case of a draggable.
-                $( event.toElement ).one('click', function(e){ e.stopImmediatePropagation(); } );
-            }
-        });
-        $cards.click(function(e) { self.onCardClick(e); });
-        $("#card-menu>li>a").click(function(e) { self.onCardMenuClick(e); });
+        function fetchCards(type, coll) {
+            $.get("/" + type).success(function(data) {
+                var cardData = JSON.parse(data);
+                cardData.forEach(function(data) {
+                    coll.push(new Card(data));
+                });
+                self.updateMyStatsUI();
+            });
+        }
+
+        self.battlefield = new Battlefield();
+
+        fetchCards("hand", self.hand);
+        fetchCards("library", self.library);
+
         $(".turn-phases button").click(function(e) { self.onTurnPhaseClick(e); });
 
         $("#my-hand-nav").click(function(e) {
             $(e.currentTarget).addClass("active");
             self.showHand();
         });
-
         $(".hand-closebox").click(function() { self.hideHand(); });
 
         self.updateMyStatsUI();
@@ -65,44 +69,24 @@ define(
         var $handView = $(".handview");
         var $cardListUI = $handView.find("ul");
         $cardListUI.empty();
-        this.hand.forEach(function(card) {
-            var $cardUI = $('<li><img src="' + card.getImageURL() + '"/></li>');
-            $cardListUI.append($cardUI);
-        });
-		$handView.width($(".board").width() - parseInt($(".handview").css("left")) - 2);
+        if (this.hand) {
+            this.hand.forEach(function(card) {
+                var $cardUI = $('<li><img src="' + card.getImageURL() + '"/></li>');
+                $cardListUI.append($cardUI);
+            });
+    		$handView.width($(".board").width() - parseInt($(".handview").css("left")) - 2);
+        }
 		$handView.show();
         $(".hand-closebox").show();
     };
 
     MtGApp.prototype.updateMyStatsUI = function() {
-        $("#my-hand-nav .badge").text(this.hand.length);
-        $("#my-library-nav .badge").text(this.library.length);
+        if (this.hand)
+            $("#my-hand-nav .badge").text(this.hand.length);
+        if (this.library)
+            $("#my-library-nav .badge").text(this.library.length);
         $("#my-graveyard-nav .badge").text(this.graveyard.length);
         $("#my-exiled-nav .badge").text(this.exiled.length);
-    };
-
-    MtGApp.prototype.onCardClick = function(e) {
-        var self = this;
-        self.$activeCard = new CardView($(e.target));
-        self.$activeCard.setActive();
-        var $cardMenu = $("#card-menu");
-        var offset = self.$activeCard.$card.offset();
-        $("#card-menu>li>a").first().text(self.$activeCard.isTapped() ? "Untap" : "Tap");
-        $cardMenu.show();
-        $cardMenu.offset({ top: offset.top + 3, left: offset.left + 23 });
-    };
-
-    MtGApp.prototype.onCardMenuClick = function(e) {
-        var self = this;
-        var $cardMenu = $("#card-menu");
-
-        switch ($(e.target).text()) {
-            case "Tap":
-            case "Untap":
-                self.$activeCard.toggleTappedState();
-                $cardMenu.hide();
-                break;
-        }
     };
 
     MtGApp.prototype.onTurnPhaseClick = function(e) {

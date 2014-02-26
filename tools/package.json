@@ -1,0 +1,8 @@
+{
+  "name": "mtg",
+  "description": "Magic the Gathering Game Server",
+  "version": "0.1.0",
+  "dependencies": {
+    "jsdom": "~0.10"
+  }
+}

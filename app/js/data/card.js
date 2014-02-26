@@ -4,20 +4,21 @@ The Card data class.
 @module data
 @class Card
 **/
-define(function() {
+define(['jquery'], function($) {
     "use strict";
 
     /**
         The Card object.
         @constructor
     */
-    function Card(initID) {
-        this.cardID = initID;
+    function Card(initData) {
+        $.extend(this, initData);
     }
 
     Card.prototype.getImageURL = function() {
-        return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + 
-                this.cardID + '&amp;type=card';
+        return "/cards/" + this.set + "/" + this.name + ".full.jpg";
+        // return 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=' + 
+        //         this.id + '&amp;type=card';
     };
 
     return Card;
