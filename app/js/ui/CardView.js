@@ -35,14 +35,14 @@ define(function() {
     CardView.prototype.tap = function() {
         var self = this;
         if (!self.isTapped())
-            self.$card.rotate({angle:0, animateTo:90, duration:750});
+            self.$card.rotate({angle:0, animateTo:90, duration:500});
         self.$card.attr("data-tapped", true);
     };
 
     CardView.prototype.untap = function() {
         var self = this;
         if (self.isTapped())
-            self.$card.rotate({angle:90, animateTo:0, duration:750});
+            self.$card.rotate({angle:90, animateTo:0, duration:500});
         self.$card.attr("data-tapped", false);
     };
 
