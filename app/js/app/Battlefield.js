@@ -43,6 +43,8 @@ define(
 		});
 
         $("#card-menu>li>a").click(function(e) { self.onCardMenuClick(e); });
+
+        $(".battlefield").click(function(e) { $("#card-menu").hide(); });
 	}
 
 	Battlefield.prototype = new EventTarget();
@@ -57,6 +59,7 @@ define(
         $("#card-menu>li>a").first().text(self.$activeCard.isTapped() ? "Untap" : "Tap");
         $cardMenu.show();
         $cardMenu.offset({ top: offset.top + 3, left: offset.left + 23 });
+        e.stopImmediatePropagation();
     };
 
     Battlefield.prototype.onCardMenuClick = function(e) {
@@ -70,6 +73,8 @@ define(
                 $cardMenu.hide();
                 break;
         }
+
+        e.stopImmediatePropagation();
     };
 
 	return Battlefield;

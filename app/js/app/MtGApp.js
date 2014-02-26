@@ -56,6 +56,7 @@ define(
         $(".hand-closebox").click(function() { self.hideHand(); });
 
         self.updateMyStatsUI();
+        self.updateOppStatsUI();
     };
 
     MtGApp.prototype.hideHand = function() {
@@ -87,6 +88,12 @@ define(
             $("#my-library-nav .badge").text(this.library.length);
         $("#my-graveyard-nav .badge").text(this.graveyard.length);
         $("#my-exiled-nav .badge").text(this.exiled.length);
+    };
+
+    MtGApp.prototype.updateOppStatsUI = function() {
+        $("#opp-life .badge").text("20");
+        $("#opp-hand .badge").text("7");
+        $("#opp-library .badge").text("53");
     };
 
     MtGApp.prototype.onTurnPhaseClick = function(e) {

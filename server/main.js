@@ -27,7 +27,7 @@ app.use(express.static(__dirname + '/../app'));
 // read the card data
 var cards = {};
 var fs = require('fs');
-fs.readFile("data/theros.json", function(err, data) {
+fs.readFile(__dirname + "/data/theros.json", function(err, data) {
 	var cardData = JSON.parse(data);
 	utils.extend(cards, cardData);
 });
