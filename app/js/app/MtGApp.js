@@ -66,19 +66,29 @@ define(
         $(".hand-closebox").hide();
     };
 
-    MtGApp.prototype.showHand = function() {
+    MtGApp.prototype.showHand = function(animateFirst) {
         var $handView = $(".handview");
         var $cardListUI = $handView.find("ul");
+        var animateWidth = 0;
         $cardListUI.empty();
         if (this.hand) {
             this.hand.forEach(function(card) {
                 var $cardUI = $('<li><img src="' + card.getImageURL() + '"/></li>');
+                if (animateFirst) {
+                    animateWidth = 223;
+                    $cardUI.css("opacity", "0");
+                    animateFirst = false;
+                }
                 $cardListUI.append($cardUI);
             });
     		$handView.width($(".board").width() - parseInt($(".handview").css("left")) - 2);
         }
 		$handView.show();
         $(".hand-closebox").show();
+        if (animateWidth) {
+            console.log("setting width to: " + animateWidth);
+            $cardListUI.children().first().animate({opacity: "1"}, 500);
+        }
     };
 
     MtGApp.prototype.updateMyStatsUI = function() {
@@ -124,7 +134,7 @@ define(
             var newCardID = self.library[0];
             self.library = self.library.slice(1);
             self.hand.unshift(new Card(newCardID));
-            self.showHand();
+            self.showHand(true);
             self.updateMyStatsUI();
         }
     };
